@@ -13,6 +13,7 @@ import { ItemService } from "./item.service";
                 <span>{{item.Title}}</span>
             </li>
         </ul>
+        <item-detail *ngIf="selectedItem" [item]="selectedItem"></item-detail>
     `,
     styles: [`
         ul.items li {
