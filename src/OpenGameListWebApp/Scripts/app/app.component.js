@@ -14,7 +14,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: "opengamelist",
-            template: "\n        <h1>{{title}}</h1>\n        <item-list></item-list>\n    "
+            template: "\n        <h1>{{title}}</h1>\n        <div class=\"menu\">\n            <a class=\"home\" [routerLink]=\"['']\">Home</a>\n            | <a class=\"about\" [routerLink]=\"['about']\">About</a>\n            | <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n        </div>\n        <router-outlet></router-outlet>\n    "
         })
     ], AppComponent);
     return AppComponent;

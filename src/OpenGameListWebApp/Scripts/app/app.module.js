@@ -9,9 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
+var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
 require("rxjs/Rx");
+var about_component_1 = require("./about.component");
 var app_component_1 = require("./app.component");
+var home_component_1 = require("./home.component");
+var item_detail_component_1 = require("./item-detail.component");
 var item_list_component_1 = require("./item-list.component");
+var login_component_1 = require("./login.component");
+var page_not_found_component_1 = require("./page-not-found.component");
+var app_routing_1 = require("./app.routing");
 var item_service_1 = require("./item.service");
 var AppModule = (function () {
     function AppModule() {
@@ -20,19 +28,29 @@ var AppModule = (function () {
         core_1.NgModule({
             // directives, components, and pipes
             declarations: [
+                about_component_1.AboutComponent,
                 app_component_1.AppComponent,
-                item_list_component_1.ItemListComponent
+                home_component_1.HomeComponent,
+                item_list_component_1.ItemListComponent,
+                item_detail_component_1.ItemDetailComponent,
+                login_component_1.LoginComponent,
+                page_not_found_component_1.PageNotFoundComponent
             ],
             // modules
             imports: [
                 platform_browser_1.BrowserModule,
-                http_1.HttpModule
+                http_1.HttpModule,
+                forms_1.FormsModule,
+                router_1.RouterModule,
+                app_routing_1.AppRouting
             ],
             // providers
             providers: [
                 item_service_1.ItemService
             ],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [
+                app_component_1.AppComponent
+            ]
         })
     ], AppModule);
     return AppModule;

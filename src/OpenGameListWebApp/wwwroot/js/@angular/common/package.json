@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/common@2.4.10",
-      "C:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp"
+      "F:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp"
     ]
   ],
   "_from": "@angular/common@2.4.10",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@angular/common/-/common-2.4.10.tgz",
   "_spec": "2.4.10",
-  "_where": "C:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp",
+  "_where": "F:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp",
   "author": {
     "name": "angular"
   },
