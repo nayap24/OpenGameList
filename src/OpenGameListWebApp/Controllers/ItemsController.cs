@@ -25,7 +25,7 @@ namespace OpenGameListWebApp.Controllers
         }
         #endregion
 
-        #region RESTful conventions
+        #region RESTful Conventions
         /// <summary>
         /// GET: api/items
         /// </summary>
@@ -46,7 +46,36 @@ namespace OpenGameListWebApp.Controllers
         public IActionResult Get(int id)
         {
             var item = _dbContext.Items.Where(i => i.Id == id).FirstOrDefault();
-            return new JsonResult(TinyMapper.Map<ItemViewModel>(item), DefaultJsonSettings);
+            if (item != null)
+                return new JsonResult(TinyMapper.Map<ItemViewModel>(item), DefaultJsonSettings);
+            else
+                return NotFound(new { Error = string.Format(" Item ID {0} has not been found", id) });
+        }
+
+        /// <summary>
+        /// POST: api/items
+        /// </summary>
+        /// <returns>Creates a new Item and return it accordingly.</returns>
+        [HttpPost()]
+        public IActionResult Add([FromBody]ItemViewModel vm)
+        {
+            if (vm != null)
+            {
+                // create a new item with the client-sent json data
+                var item = TinyMapper.Map<Item>(vm);
+                // override any property that could be wise to sent from server-side only
+                item.CreatedDate = item.LastModifiedDate = DateTime.Now;
+                // TODO: replace the following with the current user's id when the authentication will be available
+                item.UserId = _dbContext.Users.Where(u => u.UserName == "Admin").FirstOrDefault().Id;
+                // add the new item
+                _dbContext.Items.Add(item);
+                // persist the changes into the Database.
+                _dbContext.SaveChanges();
+                // return newly-created item to the client.
+                return new JsonResult(TinyMapper.Map<ItemViewModel>(item), DefaultJsonSettings);
+            }
+            // return a generic HTTP Status 500 (Not Found) if the client payload is invalid.
+            return new StatusCodeResult(500);
         }
         #endregion
 
