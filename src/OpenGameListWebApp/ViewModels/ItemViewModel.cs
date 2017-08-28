@@ -25,7 +25,7 @@ namespace OpenGameListWebApp.ViewModels
         public int Flags { get; set; }
         public string UserId { get; set; }
         [JsonIgnore]
-        public int ViewCout { get; set; }
+        public int ViewCount { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
         #endregion

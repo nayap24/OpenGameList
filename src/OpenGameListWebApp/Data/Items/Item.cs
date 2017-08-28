@@ -36,7 +36,7 @@ namespace OpenGameListWebApp.Data.Items
         public string UserId { get; set; }
 
         [Required]
-        public int ViewCout { get; set; }
+        public int ViewCount { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }

@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/platform-browser-dynamic@2.4.10",
-      "F:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp"
+      "C:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp"
     ]
   ],
   "_from": "@angular/platform-browser-dynamic@2.4.10",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.4.10.tgz",
   "_spec": "2.4.10",
-  "_where": "F:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp",
+  "_where": "C:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp",
   "author": {
     "name": "angular"
   },

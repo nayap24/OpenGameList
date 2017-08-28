@@ -38,7 +38,7 @@ namespace OpenGameListWebApp.Data
             modelBuilder.Entity<Comment>().HasOne(c => c.Author).WithMany(u => u.Comments).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Comment>().HasOne(c => c.Item).WithMany(i => i.Comments);
             modelBuilder.Entity<Comment>().HasOne(c => c.Parent).WithMany(c => c.Children);
-            modelBuilder.Entity<Comment>().HasMany(i => i.Children).WithOne(c => c.Parent);
+            modelBuilder.Entity<Comment>().HasMany(c => c.Children).WithOne(c => c.Parent);
         }
         #endregion
     }

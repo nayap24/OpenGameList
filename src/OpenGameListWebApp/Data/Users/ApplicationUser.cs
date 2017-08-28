@@ -17,7 +17,7 @@ namespace OpenGameListWebApp.Data.Users
         #region Properties
         [Key]
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
         
         [Required]
         public string UserName { get; set; }
@@ -45,7 +45,7 @@ namespace OpenGameListWebApp.Data.Users
         /// A list of items wrote by this user: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>
         public virtual List<Item> Items { get; set; }
-
+        
         /// <summary>
         /// A list of comments wrote by this user: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Nelibur.ObjectMapper;
 using Newtonsoft.Json;
+using OpenGameListWebApp.Data;
+using OpenGameListWebApp.Data.Items;
 using OpenGameListWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,18 @@ namespace OpenGameListWebApp.Controllers
     [Route("api/[controller]")]
     public class ItemsController : Controller
     {
+        #region Private Fields
+        private ApplicationDbContext _dbContext;
+        #endregion
+
+        #region Constructor
+        public ItemsController(ApplicationDbContext context)
+        {
+            // Dependency Injection
+            _dbContext = context;
+        }
+        #endregion
+
         #region RESTful conventions
         /// <summary>
         /// GET: api/items
@@ -30,10 +45,8 @@ namespace OpenGameListWebApp.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return new JsonResult(GetSampleItems()
-                .Where(i => i.Id == id)
-                .FirstOrDefault(),
-                DefaultJsonSettings);
+            var item = _dbContext.Items.Where(i => i.Id == id).FirstOrDefault();
+            return new JsonResult(TinyMapper.Map<ItemViewModel>(item), DefaultJsonSettings);
         }
         #endregion
 
@@ -58,8 +71,8 @@ namespace OpenGameListWebApp.Controllers
         public IActionResult GetLatest(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderByDescending(i => i.CreatedDate).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var items = _dbContext.Items.OrderByDescending(i => i.CreatedDate).Take(n).ToArray();
+            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
 
         /// <summary>
@@ -82,8 +95,8 @@ namespace OpenGameListWebApp.Controllers
         public IActionResult GetMostViewed(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderByDescending(i => i.ViewCout).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var items = _dbContext.Items.OrderByDescending(i => i.ViewCount).Take(n).ToArray();
+            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
 
         /// <summary>
@@ -106,37 +119,27 @@ namespace OpenGameListWebApp.Controllers
         public IActionResult GetRandom(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderBy(i => Guid.NewGuid()).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var items = _dbContext.Items.OrderBy(i => Guid.NewGuid()).Take(n).ToArray();
+            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
         #endregion
 
         #region Private Members
         /// <summary>
-        /// Generate a sample array of source Items to emulate a database (for testing purposes only).
+        /// Maps a collection of Item entities into a list of ItemViewModel objects.
         /// </summary>
-        /// <param name="num">The number of items to generate: default is 999</param>
-        /// <returns>a defined number of mock items (for testing purposes only)</returns>
-        private List<ItemViewModel> GetSampleItems(int num = 999)
+        /// <param name="items">An IEnumerable collection of item entities</param>
+        /// <returns>a mapped list of ItemViewModel objects</returns>
+        private List<ItemViewModel> ToItemViewModelList(IEnumerable<Item> items)
         {
-            List <ItemViewModel> list = new List<ItemViewModel>();
-            DateTime date = new DateTime(2015, 12, 31).AddDays(-num);
+            var list = new List<ItemViewModel>();
 
-            for (int id = 1; id <= num; id++) 
+            foreach (var i in items)
             {
-                list.Add(new ItemViewModel()
-                {
-                    Id = id,
-                    Title = string.Format("Item {0} Title", id),
-                    Description = string.Format("This is sample description for item {0}: Lorem ipsum dolor sit amet.", id),
-                    CreatedDate = date.AddDays(id),
-                    LastModifiedDate = date.AddDays(id),
-                    ViewCout = num - id
-                });
+                list.Add(TinyMapper.Map<ItemViewModel>(i));
             }
 
             return list;
-            
         }
 
         /// <summary>
