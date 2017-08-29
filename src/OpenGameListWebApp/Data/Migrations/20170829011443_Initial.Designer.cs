@@ -8,7 +8,7 @@ using OpenGameListWebApp.Data;
 namespace OpenGameListWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170828175857_Initial")]
+    [Migration("20170829011443_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
