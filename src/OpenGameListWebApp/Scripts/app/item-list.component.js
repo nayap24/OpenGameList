@@ -40,8 +40,8 @@ var ItemListComponent = (function () {
     };
     ItemListComponent.prototype.onSelect = function (item) {
         this.selectedItem = item;
-        console.log("item " + this.selectedItem.Id + " has been clicked: loading ItemDetailComponent...");
-        this.router.navigate(["item", this.selectedItem.Id]);
+        console.log("item " + this.selectedItem.Id + " has been clicked: loading item viewer");
+        this.router.navigate(["item/view", this.selectedItem.Id]);
     };
     __decorate([
         core_1.Input(),

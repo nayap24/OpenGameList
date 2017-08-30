@@ -49,19 +49,17 @@ export class ItemService {
     // calls the [POST] /api/items/ Web API  method to add a new item.
     add(item: Item) {
         var url = this.baseUrl;
-        return this.http.post(url, JSON.stringify(item),
-            this.getRequestOptions())
-                .map(response => response.json())
-                .catch(this.handleError);
+        return this.http.post(url, JSON.stringify(item), this.getRequestOptions())
+            .map(response => response.json())
+            .catch(this.handleError);
     }
 
     // calls the [PUT] /api/items/{id} Web API method to update an existing item.
     update(item: Item) {
         var url = this.baseUrl + item.Id;
-        return this.http.put(url, JSON.stringify(item),
-            this.getRequestOptions())
-                .map(response => response.json())
-                .catch(this.handleError);
+        return this.http.put(url, JSON.stringify(item), this.getRequestOptions())
+            .map(response => response.json())
+            .catch(this.handleError);
     }
 
     // calls the [DELETE] /api/items/{id} Web API method to delete the item with the given id.

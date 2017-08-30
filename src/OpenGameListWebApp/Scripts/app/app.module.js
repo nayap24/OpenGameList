@@ -15,7 +15,8 @@ require("rxjs/Rx");
 var about_component_1 = require("./about.component");
 var app_component_1 = require("./app.component");
 var home_component_1 = require("./home.component");
-var item_detail_component_1 = require("./item-detail.component");
+var item_detail_edit_component_1 = require("./item-detail-edit.component");
+var item_detail_view_component_1 = require("./item-detail-view.component");
 var item_list_component_1 = require("./item-list.component");
 var login_component_1 = require("./login.component");
 var page_not_found_component_1 = require("./page-not-found.component");
@@ -32,7 +33,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
                 item_list_component_1.ItemListComponent,
-                item_detail_component_1.ItemDetailComponent,
+                item_detail_edit_component_1.ItemDetailEditComponent,
+                item_detail_view_component_1.ItemDetailViewComponent,
                 login_component_1.LoginComponent,
                 page_not_found_component_1.PageNotFoundComponent
             ],

@@ -107,7 +107,7 @@ namespace OpenGameListWebApp.Data
             {
                 UserId = authorId,
                 Title = "Magarena",
-                Description = "Single-player fantasy card game similar to Magic: The Gathering",
+                Description = "Single-player fantasy card game similar to Magic: The Gathering.",
                 Text = @"Loosely based on Magic: The Gathering, the game lets you play against a computer opponent or another human being.
 The game features a well-developed AI, an intuitive and clear interface and an enticing level of gameplay.",
                 Notes = "This is a sample record created by the Code-First Configuration class",
