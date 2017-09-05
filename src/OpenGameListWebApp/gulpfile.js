@@ -1,12 +1,13 @@
 ﻿var gulp = require("gulp"),
     gp_clean = require('gulp-clean'),
+    gp_less = require('gulp-less'),
     gp_sourcemaps = require('gulp-sourcemaps'),
     gp_typescript = require('gulp-typescript'),
     gp_uglify = require('gulp-uglify');
 
 /// Define paths
 var srcPaths = {
-    app: ['Scripts/app/**/*.ts'],
+    app: ['Scripts/app/main.ts', 'Scripts/app/**/*.ts'],
     js: [
         'Scripts/js/**/*.js',
         'node_modules/core-js/client/shim.min.js',
@@ -18,11 +19,15 @@ var srcPaths = {
     ],
     js_rxjs: [
         'node_modules/rxjs/**'
+    ],
+    less: [
+        'Scripts/less/**/*.less'
     ]
 };
 
 var destPaths = {
     app: 'wwwroot/app/',
+    css: 'wwwroot/css/',
     js: 'wwwroot/js/',
     js_angular: 'wwwroot/js/@angular/',
     js_rxjs: 'wwwroot/js/rxjs/'
@@ -38,6 +43,12 @@ gulp.task('app', ['app_clean'], function () {
         .pipe(gulp.dest(destPaths.app));
 });
 
+// Delete wwwroot/app contents
+gulp.task('app_clean', function () {
+    return gulp.src(destPaths.app + "*", { read: false })
+        .pipe(gp_clean({ force: true }));
+});
+
 // Copy all JS files from external libraries to wwwroot/js
 gulp.task('js', function () {
     gulp.src(srcPaths.js_angular)
@@ -48,23 +59,36 @@ gulp.task('js', function () {
         .pipe(gulp.dest(destPaths.js));
 });
 
-// Delete wwwroot/app contents
-gulp.task('app_clean', function () {
-    return gulp.src(destPaths.app + "*", { read: false })
-        .pipe(gp_clean({ force: true }));
-});
-
 // Delete wwwroot/js contents
 gulp.task('js_clean', function () {
     return gulp.src(destPaths.js + "*", { read: false })
         .pipe(gp_clean({ force: true }));
 });
 
-// Global cleanup task
-gulp.task('cleanup', ['app_clean', 'js_clean']);
-
-gulp.task('watch', function () {
-    gulp.watch([srcPaths.app, srcPaths.js], ['app', 'js']);
+// Process all LESS files and output the resulting CSS in wwwroot/css
+gulp.task('less', ['less_clean'], function () {
+    return gulp.src(srcPaths.less)
+        .pipe(gp_less())
+        .pipe(gulp.dest(destPaths.css));
 });
 
-gulp.task('default', ['app', 'js', 'watch']);
+// Delete wwwroot/css contents
+gulp.task('less_clean', function () {
+    return gulp.src(destPaths.css + "*.*", { read: false })
+        .pipe(gp_clean({ force: true }));
+});
+
+// Watch specified files and define what to do upon file changes
+gulp.task('watch', function () {
+    gulp.watch([
+        srcPaths.app,
+        srcPaths.js,
+        srcPaths.less],
+        ['app', 'js', 'less']);
+});
+
+// Global cleanup task
+gulp.task('cleanup', ['app_clean', 'js_clean', 'less_clean']);
+
+// Define the default task so it will launch all other tasks
+gulp.task('default', ['app', 'js', 'less', 'watch']);
