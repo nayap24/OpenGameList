@@ -9,7 +9,7 @@
     // packages tells the System loader which filename and/or extensions to look for by default (when none are specified)
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
-        'rxjs': { defaultExtension: 'js' }
+        'rxjs': { defaultExtension: 'js' },
     };
 
     // configure @angular packages
