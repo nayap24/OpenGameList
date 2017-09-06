@@ -12,7 +12,9 @@ var srcPaths = {
         'Scripts/js/**/*.js',
         'node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.js',
-        'node_modules/systemjs/dist/system.src.js'
+        'node_modules/systemjs/dist/system.src.js',
+        'node_modules/ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
+        'node_modules/moment/moment.js'
     ],
     js_angular: [
         'node_modules/@angular/**'
@@ -45,7 +47,7 @@ gulp.task('app', ['app_clean'], function () {
 
 // Delete wwwroot/app contents
 gulp.task('app_clean', function () {
-    return gulp.src(destPaths.app + "*", { read: false })
+    return gulp.src(destPaths.app + "*.*", { read: false })
         .pipe(gp_clean({ force: true }));
 });
 
@@ -61,7 +63,7 @@ gulp.task('js', function () {
 
 // Delete wwwroot/js contents
 gulp.task('js_clean', function () {
-    return gulp.src(destPaths.js + "*", { read: false })
+    return gulp.src(destPaths.js + "*.*", { read: false })
         .pipe(gp_clean({ force: true }));
 });
 
