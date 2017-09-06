@@ -8,17 +8,17 @@ import { ItemService } from "./item.service";
     template: `
         <div *ngIf="item">
             <h2>
-                <a href="#" (click)="onBack()">
+                <a href="javascript:void(0)" (click)="onBack()">
                     &laquo; Back to Home
                 </a>
             </h2>
             <div class="item-container">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active">
-                        <a href="#">Edit</a>
+                        <a href="javascript:void(0)">Edit</a>
                     </li>
                     <li role="presentation" *ngIf="item.Id != 0">
-                        <a href="#" (click)="onItemDetailView(item)">View</a>
+                        <a href="javascript:void(0)" (click)="onItemDetailView(item)">View</a>
                     </li>
                 </ul>
                 <div class="panel panel-default">
@@ -32,7 +32,7 @@ import { ItemService } from "./item.service";
                             </h3>
                             <div class="form-group has-feedback" [ngClass]="{'has-success': dTitle.valid, 'has-error': !dTitle.valid}">
                                 <label for="input-title">Title</label>
-                                <input id="input-title" name="input-title" type="text" class="formcontrol" [(ngModel)]="item.Title" placeholder="Insert the title..." required #dTitle="ngModel" />
+                                <input id="input-title" name="input-title" type="text" class="form-control" [(ngModel)]="item.Title" placeholder="Insert the title..." required #dTitle="ngModel" />
                                 <span class="glyphicon form-control-feedback" aria-hidden="true" [ngClass]="{'glyphicon-ok': dTitle.valid, 'glyphicon-remove': !dTitle.valid}"></span>
                                 <div [hidden]=" dTitle.valid" class="alert alert-danger">
                                     You need to enter a valid Title.
@@ -40,7 +40,7 @@ import { ItemService } from "./item.service";
                             </div>
                             <div class="form-group">
                                 <label for="input-description">Description</label>
-                                <textarea id="input-description" name="inputdescription" class="form-control" [(ngModel)]="item.Description" placeholder="Insert a suitable description..." required></textarea>
+                                <textarea id="input-description" name="input-description" class="form-control" [(ngModel)]="item.Description" placeholder="Insert a suitable description..." required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="input-text">Text</label>

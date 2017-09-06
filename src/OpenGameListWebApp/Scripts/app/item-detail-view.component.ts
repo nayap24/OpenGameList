@@ -8,15 +8,15 @@ import { ItemService } from "./item.service";
     template: `
         <div *ngIf="item">
             <h2>
-                <a href="#" (click)="onBack()">&laquo; Back to Home</a>
+                <a href="javascript:void(0)" (click)="onBack()">&laquo; Back to Home</a>
             </h2>
             <div class="item-container">
                 <ul class="nav nav-tabs">
                     <li role="presentation">
-                        <a href="#" (click)="onItemDetailEdit(item)">Edit</a>
+                        <a href="javascript:void(0)" (click)="onItemDetailEdit(item)">Edit</a>
                     </li>
                     <li role="presentation" class="active">
-                        <a href="#">View</a>
+                        <a href="javascript:void(0)">View</a>
                     </li>
                 </ul>
                 <div class="panel panel-default">
