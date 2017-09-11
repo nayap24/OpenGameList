@@ -1,2 +1,42 @@
-"use strict";var __decorate=this&&this.__decorate||function(e,a,t,n){var r,o=arguments.length,i=o<3?a:null===n?n=Object.getOwnPropertyDescriptor(a,t):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)i=Reflect.decorate(e,a,t,n);else for(var s=e.length-1;s>=0;s--)(r=e[s])&&(i=(o<3?r(i):o>3?r(a,t,i):r(a,t))||i);return o>3&&i&&Object.defineProperty(a,t,i),i},__metadata=this&&this.__metadata||function(e,a){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(e,a)};Object.defineProperty(exports,"__esModule",{value:!0});var core_1=require("@angular/core"),router_1=require("@angular/router"),AppComponent=function(){function e(e){this.router=e,this.title="OpenGameList"}return e.prototype.isActive=function(e){return this.router.isActive(this.router.createUrlTree(e),!0)},e=__decorate([core_1.Component({selector:"opengamelist",template:'\n        <nav class="navbar navbar-default navbar-fixed-top">\n            <div class="container-fluid">\n                <input type="checkbox" id="navbar-toggle-cbox">\n                <div class="navbar-header">\n                    <label for="navbar-toggle-cbox" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" ariacontrols="navbar">\n                        <span class="sr-only">Toggle navigation</span>\n                        <span class="icon-bar"></span>\n                        <span class="icon-bar"></span>\n                        <span class="icon-bar"></span>\n                    </label>\n                    <a class="navbar-brand" href="#">\n                        <img alt="logo" src="/img/logo.svg" />\n                    </a>\n                </div>\n                <div class="collapse navbar-collapse" id="navbar">\n                    <ul class="nav navbar-nav">\n                        <li [class.active]="isActive([\'\'])">\n                            <a class="home" [routerLink]="[\'\']">Home</a>\n                        </li>\n                        <li [class.active]="isActive([\'about\'])">\n                            <a class="about" [routerLink]="[\'about\']">About</a>\n                        </li>\n                        <li [class.active]="isActive([\'login\'])">\n                            <a class="login" [routerLink]="[\'login\']">Login</a>\n                        </li>\n                        <li [class.active]="isActive([\'item/edit\', 0])">\n                            <a class="add" [routerLink]="[\'item/edit\', 0]">Add New</a>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </nav>\n        <h1 class="header">{{title}}</h1>\n        <div class="main-container">\n            <router-outlet></router-outlet>\n        </div>\n    '}),__metadata("design:paramtypes",[router_1.Router])],e)}();exports.AppComponent=AppComponent;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var auth_service_1 = require("./auth.service");
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var AppComponent = (function () {
+    function AppComponent(router, authService) {
+        this.router = router;
+        this.authService = authService;
+        this.title = "OpenGameList";
+    }
+    AppComponent.prototype.isActive = function (data) {
+        return this.router.isActive(this.router.createUrlTree(data), true);
+    };
+    AppComponent.prototype.logout = function () {
+        // logs out the user, then redirects him to Welcome View.
+        if (this.authService.logout()) {
+            this.router.navigate([""]);
+        }
+        return false;
+    };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: "opengamelist",
+            template: "\n        <nav class=\"navbar navbar-default navbar-fixed-top\">\n            <div class=\"container-fluid\">\n                <input type=\"checkbox\" id=\"navbar-toggle-cbox\">\n                <div class=\"navbar-header\">\n                    <label for=\"navbar-toggle-cbox\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" ariacontrols=\"navbar\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </label>\n                    <a class=\"navbar-brand\" href=\"javascript:void(0)\">\n                        <img alt=\"logo\" src=\"/img/logo.svg\" />\n                    </a>\n                </div>\n                <div class=\"collapse navbar-collapse\" id=\"navbar\">\n                    <ul class=\"nav navbar-nav\">\n                        <li [class.active]=\"isActive([''])\">\n                            <a class=\"home\" [routerLink]=\"['']\">Home</a>\n                        </li>\n                        <li [class.active]=\"isActive(['about'])\">\n                            <a class=\"about\" [routerLink]=\"['about']\">About</a>\n                        </li>\n                        <li *ngIf=\"!authService.isLoggedIn()\" [class.active]=\"isActive(['login'])\">\n                            <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n                        </li>\n                        <li *ngIf=\"authService.isLoggedIn()\" [class.active]=\"isActive(['login'])\">\n                            <a class=\"logout\" href=\"javascript:void(0)\" (click)=\"logout()\">Logout</a>\n                        </li>\n                        <li *ngIf=\"authService.isLoggedIn()\" [class.active]=\"isActive(['item/edit', 0])\">\n                            <a class=\"add\" [routerLink]=\"['item/edit', 0]\">Add New</a>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </nav>\n        <h1 class=\"header\">{{title}}</h1>\n        <div class=\"main-container\">\n            <router-outlet></router-outlet>\n        </div>\n    "
+        }),
+        __metadata("design:paramtypes", [router_1.Router, auth_service_1.AuthService])
+    ], AppComponent);
+    return AppComponent;
+}());
+exports.AppComponent = AppComponent;
+
 //# sourceMappingURL=app.component.js.map

@@ -1,2 +1,13 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var Item=function(){return function(t,e,i){this.Id=t,this.Title=e,this.Description=i}}();exports.Item=Item;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Item = (function () {
+    function Item(Id, Title, Description) {
+        this.Id = Id;
+        this.Title = Title;
+        this.Description = Description;
+    }
+    return Item;
+}());
+exports.Item = Item;
+
 //# sourceMappingURL=item.js.map

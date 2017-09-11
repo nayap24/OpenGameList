@@ -1,2 +1,24 @@
-"use strict";var __decorate=this&&this.__decorate||function(e,t,o,n){var i,r=arguments.length,c=r<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)c=Reflect.decorate(e,t,o,n);else for(var s=e.length-1;s>=0;s--)(i=e[s])&&(c=(r<3?i(c):r>3?i(t,o,c):i(t,o))||c);return r>3&&c&&Object.defineProperty(t,o,c),c};Object.defineProperty(exports,"__esModule",{value:!0});var core_1=require("@angular/core"),HomeComponent=function(){function e(){this.title="Welcome View"}return e=__decorate([core_1.Component({selector:"home",template:'\n        <h2>\n            A non-comprehensive directory of open-source video games available on the web\n        </h2>\n        <div class="col-md-4">\n            <item-list class="latest"></item-list>\n        </div>\n        <div class="col-md-4">\n            <item-list class="most-viewed"></item-list>\n        </div>\n        <div class="col-md-4">\n            <item-list class="random"></item-list>\n        </div>\n    '})],e)}();exports.HomeComponent=HomeComponent;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var HomeComponent = (function () {
+    function HomeComponent() {
+        this.title = "Welcome View";
+    }
+    HomeComponent = __decorate([
+        core_1.Component({
+            selector: "home",
+            template: "\n        <h2>\n            A non-comprehensive directory of open-source video games available on the web\n        </h2>\n        <div class=\"col-md-4\">\n            <item-list class=\"latest\"></item-list>\n        </div>\n        <div class=\"col-md-4\">\n            <item-list class=\"most-viewed\"></item-list>\n        </div>\n        <div class=\"col-md-4\">\n            <item-list class=\"random\"></item-list>\n        </div>\n    "
+        })
+    ], HomeComponent);
+    return HomeComponent;
+}());
+exports.HomeComponent = HomeComponent;
+
 //# sourceMappingURL=home.component.js.map

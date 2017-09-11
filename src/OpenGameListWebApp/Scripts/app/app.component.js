@@ -9,22 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var auth_service_1 = require("./auth.service");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var AppComponent = (function () {
-    function AppComponent(router) {
+    function AppComponent(router, authService) {
         this.router = router;
+        this.authService = authService;
         this.title = "OpenGameList";
     }
     AppComponent.prototype.isActive = function (data) {
         return this.router.isActive(this.router.createUrlTree(data), true);
     };
+    AppComponent.prototype.logout = function () {
+        // logs out the user, then redirects him to Welcome View.
+        if (this.authService.logout()) {
+            this.router.navigate([""]);
+        }
+        return false;
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: "opengamelist",
-            template: "\n        <nav class=\"navbar navbar-default navbar-fixed-top\">\n            <div class=\"container-fluid\">\n                <input type=\"checkbox\" id=\"navbar-toggle-cbox\">\n                <div class=\"navbar-header\">\n                    <label for=\"navbar-toggle-cbox\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" ariacontrols=\"navbar\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </label>\n                    <a class=\"navbar-brand\" href=\"#\">\n                        <img alt=\"logo\" src=\"/img/logo.svg\" />\n                    </a>\n                </div>\n                <div class=\"collapse navbar-collapse\" id=\"navbar\">\n                    <ul class=\"nav navbar-nav\">\n                        <li [class.active]=\"isActive([''])\">\n                            <a class=\"home\" [routerLink]=\"['']\">Home</a>\n                        </li>\n                        <li [class.active]=\"isActive(['about'])\">\n                            <a class=\"about\" [routerLink]=\"['about']\">About</a>\n                        </li>\n                        <li [class.active]=\"isActive(['login'])\">\n                            <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n                        </li>\n                        <li [class.active]=\"isActive(['item/edit', 0])\">\n                            <a class=\"add\" [routerLink]=\"['item/edit', 0]\">Add New</a>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </nav>\n        <h1 class=\"header\">{{title}}</h1>\n        <div class=\"main-container\">\n            <router-outlet></router-outlet>\n        </div>\n    "
+            template: "\n        <nav class=\"navbar navbar-default navbar-fixed-top\">\n            <div class=\"container-fluid\">\n                <input type=\"checkbox\" id=\"navbar-toggle-cbox\">\n                <div class=\"navbar-header\">\n                    <label for=\"navbar-toggle-cbox\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" ariacontrols=\"navbar\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </label>\n                    <a class=\"navbar-brand\" href=\"javascript:void(0)\">\n                        <img alt=\"logo\" src=\"/img/logo.svg\" />\n                    </a>\n                </div>\n                <div class=\"collapse navbar-collapse\" id=\"navbar\">\n                    <ul class=\"nav navbar-nav\">\n                        <li [class.active]=\"isActive([''])\">\n                            <a class=\"home\" [routerLink]=\"['']\">Home</a>\n                        </li>\n                        <li [class.active]=\"isActive(['about'])\">\n                            <a class=\"about\" [routerLink]=\"['about']\">About</a>\n                        </li>\n                        <li *ngIf=\"!authService.isLoggedIn()\" [class.active]=\"isActive(['login'])\">\n                            <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n                        </li>\n                        <li *ngIf=\"authService.isLoggedIn()\" [class.active]=\"isActive(['login'])\">\n                            <a class=\"logout\" href=\"javascript:void(0)\" (click)=\"logout()\">Logout</a>\n                        </li>\n                        <li *ngIf=\"authService.isLoggedIn()\" [class.active]=\"isActive(['item/edit', 0])\">\n                            <a class=\"add\" [routerLink]=\"['item/edit', 0]\">Add New</a>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </nav>\n        <h1 class=\"header\">{{title}}</h1>\n        <div class=\"main-container\">\n            <router-outlet></router-outlet>\n        </div>\n    "
         }),
-        __metadata("design:paramtypes", [router_1.Router])
+        __metadata("design:paramtypes", [router_1.Router, auth_service_1.AuthService])
     ], AppComponent);
     return AppComponent;
 }());

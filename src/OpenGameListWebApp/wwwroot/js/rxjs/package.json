@@ -2,7 +2,7 @@
   "_args": [
     [
       "rxjs@5.4.3",
-      "F:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp"
+      "C:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp"
     ]
   ],
   "_from": "rxjs@5.4.3",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.4.3.tgz",
   "_spec": "5.4.3",
-  "_where": "F:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp",
+  "_where": "C:\\Projects\\VS2015\\OpenGameList\\src\\OpenGameListWebApp",
   "author": {
     "name": "Ben Lesh",
     "email": "ben@benlesh.com"

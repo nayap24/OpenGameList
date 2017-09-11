@@ -40,7 +40,7 @@ gulp.task('app', ['app_clean'], function () {
     return gulp.src(srcPaths.app)
         .pipe(gp_sourcemaps.init())
         .pipe(gp_typescript(require('./tsconfig.json').compilerOptions))
-        .pipe(gp_uglify())
+        //.pipe(gp_uglify())
         .pipe(gp_sourcemaps.write('/'))
         .pipe(gulp.dest(destPaths.app));
 });

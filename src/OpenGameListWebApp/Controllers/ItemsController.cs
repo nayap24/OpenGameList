@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Nelibur.ObjectMapper;
 using Newtonsoft.Json;
 using OpenGameListWebApp.Data;
@@ -7,6 +8,7 @@ using OpenGameListWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace OpenGameListWebApp.Controllers
 {
@@ -57,16 +59,17 @@ namespace OpenGameListWebApp.Controllers
         /// </summary>
         /// <returns>Creates a new Item and return it accordingly.</returns>
         [HttpPost()]
+        [Authorize]
         public IActionResult Add([FromBody]ItemViewModel ivm)
         {
             if (ivm != null)
             {
                 // create a new item with the client-sent json data
                 var item = TinyMapper.Map<Item>(ivm);
+
                 // override any property that could be wise to sent from server-side only
                 item.CreatedDate = item.LastModifiedDate = DateTime.Now;
-                // TODO: replace the following with the current user's id when the authentication will be available
-                item.UserId = _dbContext.Users.Where(u => u.UserName == "Admin").FirstOrDefault().Id;
+                item.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value; 
                 // add the new item
                 _dbContext.Items.Add(item);
                 // persist the changes into the Database.
@@ -83,6 +86,7 @@ namespace OpenGameListWebApp.Controllers
         /// </summary>
         /// <returns>Updates an existing Item and return it accordingly.</returns>
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Update(int id, [FromBody]ItemViewModel ivm)
         {
             if (ivm != null)
@@ -115,6 +119,7 @@ namespace OpenGameListWebApp.Controllers
         /// </summary>
         /// <returns>Deletes an Item, returning a HTTP status 200 (ok) when done.</returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var item = _dbContext.Items.Where(i => i.Id == id).FirstOrDefault();

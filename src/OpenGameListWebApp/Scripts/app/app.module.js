@@ -21,6 +21,8 @@ var item_list_component_1 = require("./item-list.component");
 var login_component_1 = require("./login.component");
 var page_not_found_component_1 = require("./page-not-found.component");
 var app_routing_1 = require("./app.routing");
+var auth_http_1 = require("./auth.http");
+var auth_service_1 = require("./auth.service");
 var item_service_1 = require("./item.service");
 var AppModule = (function () {
     function AppModule() {
@@ -43,11 +45,14 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 router_1.RouterModule,
                 app_routing_1.AppRouting
             ],
             // providers
             providers: [
+                auth_http_1.AuthHttp,
+                auth_service_1.AuthService,
                 item_service_1.ItemService
             ],
             bootstrap: [

@@ -1,2 +1,24 @@
-"use strict";var __decorate=this&&this.__decorate||function(e,t,o,r){var n,c=arguments.length,a=c<3?t:null===r?r=Object.getOwnPropertyDescriptor(t,o):r;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,o,r);else for(var u=e.length-1;u>=0;u--)(n=e[u])&&(a=(c<3?n(a):c>3?n(t,o,a):n(t,o))||a);return c>3&&a&&Object.defineProperty(t,o,a),a};Object.defineProperty(exports,"__esModule",{value:!0});var core_1=require("@angular/core"),AboutComponent=function(){function e(){this.title="About"}return e=__decorate([core_1.Component({selector:"about",template:"\n        <h2>{{title}}</h2>\n        <div>\n            OpenGameList: a production-ready, fully-featured SPA sample powered by ASP.NET Core Web API and Angular 2.\n        </div>\n    "})],e)}();exports.AboutComponent=AboutComponent;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var AboutComponent = (function () {
+    function AboutComponent() {
+        this.title = "About";
+    }
+    AboutComponent = __decorate([
+        core_1.Component({
+            selector: "about",
+            template: "\n        <h2>{{title}}</h2>\n        <div>\n            OpenGameList: a production-ready, fully-featured SPA sample powered by ASP.NET Core Web API and Angular 2.\n        </div>\n    "
+        })
+    ], AboutComponent);
+    return AboutComponent;
+}());
+exports.AboutComponent = AboutComponent;
+
 //# sourceMappingURL=about.component.js.map

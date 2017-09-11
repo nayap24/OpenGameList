@@ -1,2 +1,103 @@
-"use strict";var __decorate=this&&this.__decorate||function(t,e,r,n){var o,i=arguments.length,a=i<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,r):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(t,e,r,n);else for(var s=t.length-1;s>=0;s--)(o=t[s])&&(a=(i<3?o(a):i>3?o(e,r,a):o(e,r))||a);return i>3&&a&&Object.defineProperty(e,r,a),a},__metadata=this&&this.__metadata||function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)};Object.defineProperty(exports,"__esModule",{value:!0});var core_1=require("@angular/core"),http_1=require("@angular/http"),Rx_1=require("rxjs/Rx"),ItemService=function(){function t(t){this.http=t,this.baseUrl="api/items/"}return t.prototype.getLatest=function(t){var e=this.baseUrl+"GetLatest/";return null!=t&&(e+=t),this.http.get(e).map(function(t){return t.json()}).catch(this.handleError)},t.prototype.getMostViewed=function(t){var e=this.baseUrl+"GetMostViewed/";return null!=t&&(e+=t),this.http.get(e).map(function(t){return t.json()}).catch(this.handleError)},t.prototype.getRandom=function(t){var e=this.baseUrl+"GetRandom/";return null!=t&&(e+=t),this.http.get(e).map(function(t){return t.json()}).catch(this.handleError)},t.prototype.get=function(t){if(null==t)throw new Error("id is required.");var e=this.baseUrl+t;return this.http.get(e).map(function(t){return t.json()}).catch(this.handleError)},t.prototype.add=function(t){var e=this.baseUrl;return this.http.post(e,JSON.stringify(t),this.getRequestOptions()).map(function(t){return t.json()}).catch(this.handleError)},t.prototype.update=function(t){var e=this.baseUrl+t.Id;return this.http.put(e,JSON.stringify(t),this.getRequestOptions()).map(function(t){return t.json()}).catch(this.handleError)},t.prototype.delete=function(t){var e=this.baseUrl+t;return this.http.delete(e).catch(this.handleError)},t.prototype.getRequestOptions=function(){return new http_1.RequestOptions({headers:new http_1.Headers({"Content-Type":"application/json"})})},t.prototype.handleError=function(t){return console.error(t),Rx_1.Observable.throw(t.json().error||"Server error")},t=__decorate([core_1.Injectable(),__metadata("design:paramtypes",[http_1.Http])],t)}();exports.ItemService=ItemService;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var auth_http_1 = require("./auth.http");
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Rx_1 = require("rxjs/Rx");
+var ItemService = (function () {
+    function ItemService(http) {
+        this.http = http;
+        //private Data: { Latest: Item[], MostViewed: Item[], Random: Item[] };
+        this.baseUrl = "api/items/"; // web api URL
+    }
+    // calls the [GET] /api/items/GetLatest/{n} Web API method to retrieve the latest items.
+    ItemService.prototype.getLatest = function (num) {
+        var url = this.baseUrl + "GetLatest/";
+        if (num != null) {
+            url += num;
+        }
+        return this.http.get(url)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    // calls the [GET] /api/items/GetMostViewed/{n} Web API method to retrieve the most viewed items.
+    ItemService.prototype.getMostViewed = function (num) {
+        var url = this.baseUrl + "GetMostViewed/";
+        if (num != null) {
+            url += num;
+        }
+        return this.http.get(url)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    // calls the [GET] /api/items/GetRandom/{n} Web API method to retrieve n random items.
+    ItemService.prototype.getRandom = function (num) {
+        var url = this.baseUrl + "GetRandom/";
+        if (num != null) {
+            url += num;
+        }
+        return this.http.get(url)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    // calls the [GET] /api/items/{id} Web API method to retrieve the item with the given id.
+    ItemService.prototype.get = function (id) {
+        if (id == null) {
+            throw new Error("id is required.");
+        }
+        var url = this.baseUrl + id;
+        return this.http.get(url)
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    // calls the [POST] /api/items/ Web API  method to add a new item.
+    ItemService.prototype.add = function (item) {
+        var url = this.baseUrl;
+        return this.http.post(url, JSON.stringify(item), this.getRequestOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    // calls the [PUT] /api/items/{id} Web API method to update an existing item.
+    ItemService.prototype.update = function (item) {
+        var url = this.baseUrl + item.Id;
+        return this.http.put(url, JSON.stringify(item), this.getRequestOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    // calls the [DELETE] /api/items/{id} Web API method to delete the item with the given id.
+    ItemService.prototype.delete = function (id) {
+        var url = this.baseUrl + id;
+        return this.http.delete(url)
+            .catch(this.handleError);
+    };
+    // returns a viable RequestOptions object to handle Json requests
+    ItemService.prototype.getRequestOptions = function () {
+        return new http_1.RequestOptions({
+            headers: new http_1.Headers({
+                "Content-Type": "application/json"
+            })
+        });
+    };
+    ItemService.prototype.handleError = function (error) {
+        // output errors to the console.
+        console.error(error);
+        return Rx_1.Observable.throw(error.json().error || "Server error");
+    };
+    ItemService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [auth_http_1.AuthHttp])
+    ], ItemService);
+    return ItemService;
+}());
+exports.ItemService = ItemService;
+
 //# sourceMappingURL=item.service.js.map
