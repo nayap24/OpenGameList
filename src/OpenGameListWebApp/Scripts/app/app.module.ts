@@ -1,7 +1,7 @@
 ﻿import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import "rxjs/Rx";
 
@@ -33,6 +33,7 @@ import { ItemService } from "./item.service";
         BrowserModule,
         HttpModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         AppRouting
     ],
